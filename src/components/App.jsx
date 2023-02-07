@@ -4,6 +4,7 @@ import ContactForm from './ContactForm';
 import Filter from './Filter';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
+import { ADD, REMOVE, FILTER } from '../redux/slice'
 
 
 const App = () => {
@@ -18,19 +19,19 @@ const App = () => {
       name,
       number,
     };
-    dispatch({ type: 'ADD', payload: newContact });
+    dispatch(ADD(newContact));
   };
 
-  const handleRemoveContact = (contactId) => {
-    dispatch({ type: 'REMOVE', payload: contactId});
+  const handleRemoveContact = contactId => {
+    dispatch(REMOVE(contactId));
   };
 
-  const handleChangeFilter = (event) => {
-    dispatch({ type: 'FILTER', payload: event.target.value });
+  const handleChangeFilter = event => {
+    dispatch(FILTER(event.target.value));
   };
 
   const handleFilterContacts = () => {
-    console.log(contacts);
+
     return contacts.filter(contact => contact.name.toLowerCase().includes(filtered));
   };
 
